@@ -1,0 +1,26 @@
+# Netlify configuration for the Testnet Toolkit API.
+#
+# UPLOAD THIS FILE TO THE REPO ROOT (not inside netlify/).
+# Repo: https://github.com/duryanagy-wq/testnet-toolkit-vercel
+# (the Netlify site is deployed from the SAME repo as the Vercel port;
+# Netlify ignores the Vercel `api/` directory, Vercel ignores this file.)
+#
+# No build step: the site is a static placeholder page (public/) plus
+# one Edge Function that serves the whole API. The function is declared
+# for both /api and /api/* — the bare /api path is NOT matched by the
+# /api/* glob alone, so both declarations are needed.
+# The function sees the ORIGINAL request URL (no rewrite), so the
+# resource.url in the x402 offer always matches the URL the vAPI probe
+# actually called.
+
+[build]
+  publish = "public"
+  edge_functions = "netlify/edge-functions"
+
+[[edge_functions]]
+  function = "api"
+  path = "/api"
+
+[[edge_functions]]
+  function = "api"
+  path = "/api/*"
