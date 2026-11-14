@@ -7,7 +7,7 @@
 import handler, { weiToGweiString, weiToEthString } from "../edge-functions/api.js";
 import fs from "node:fs";
 
-const BASE = "https://testnet-toolkit.netlify.app";
+const BASE = "https://rococo-haupia-20e86a.netlify.app";
 const PAY_TO = "0x803C50DDE8899168e8443aea9CA82a6Fe693Fd7C";
 const USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 
