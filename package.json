@@ -1,0 +1,1 @@
+{"description":"Testnet Toolkit API — x402 v2 paid API (gas, balances, faucet directory) for Sepolia and Base Sepolia. Deploys to Vercel Hobby (Edge Functions).","name":"testnet-toolkit-vercel","private":true,"scripts":{"dev":"node test/serve.mjs 8787","test":"node test/harness.mjs"},"type":"module","version":"1.0.0"}
