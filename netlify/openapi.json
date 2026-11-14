@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://testnet-toolkit.netlify.app",
+      "url": "https://rococo-haupia-20e86a.netlify.app",
       "description": "Placeholder \u2014 replace with the deployed Netlify URL before publish."
     }
   ],
