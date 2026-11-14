@@ -1,0 +1,258 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Testnet Toolkit",
+    "version": "1.0.0",
+    "description": "Gas prices, balances, and faucet directory for Sepolia and Base Sepolia testnets. Paid $0.001/call in USDC on Base (x402 v2)."
+  },
+  "servers": [
+    {
+      "url": "https://testnet-toolkit.netlify.app",
+      "description": "Placeholder \u2014 replace with the deployed Netlify URL before publish."
+    }
+  ],
+  "paths": {
+    "/api/v1/gas": {
+      "get": {
+        "summary": "Testnet gas prices",
+        "description": "Current gas price, max fee estimate, and block number for Sepolia or Base Sepolia.",
+        "operationId": "getGas",
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sepolia",
+                "base-sepolia"
+              ]
+            },
+            "description": "Testnet chain id."
+          }
+        ],
+        "x-payment-info": {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "1000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x803C50DDE8899168e8443aea9CA82a6Fe693Fd7C",
+          "maxTimeoutSeconds": 120,
+          "extra": {
+            "name": "USD Coin",
+            "version": "2"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Gas data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chain": {
+                      "type": "string"
+                    },
+                    "chainId": {
+                      "type": "integer"
+                    },
+                    "gasPriceGwei": {
+                      "type": "string"
+                    },
+                    "maxFeePerGasGwei": {
+                      "type": "string"
+                    },
+                    "maxPriorityFeePerGasGwei": {
+                      "type": "string"
+                    },
+                    "blockNumber": {
+                      "type": "integer",
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing chain parameter."
+          },
+          "402": {
+            "description": "Payment required (x402 v2)."
+          },
+          "502": {
+            "description": "Upstream RPC unavailable."
+          }
+        }
+      }
+    },
+    "/api/v1/balance": {
+      "get": {
+        "summary": "ETH balance for an address",
+        "description": "ETH balance (wei + ETH) for an address on Sepolia or Base Sepolia.",
+        "operationId": "getBalance",
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sepolia",
+                "base-sepolia"
+              ]
+            },
+            "description": "Testnet chain id."
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            },
+            "description": "EVM address (0x + 40 hex chars)."
+          }
+        ],
+        "x-payment-info": {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "1000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x803C50DDE8899168e8443aea9CA82a6Fe693Fd7C",
+          "maxTimeoutSeconds": 120,
+          "extra": {
+            "name": "USD Coin",
+            "version": "2"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Balance data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chain": {
+                      "type": "string"
+                    },
+                    "chainId": {
+                      "type": "integer"
+                    },
+                    "address": {
+                      "type": "string"
+                    },
+                    "balanceWei": {
+                      "type": "string"
+                    },
+                    "balanceEth": {
+                      "type": "string"
+                    },
+                    "blockNumber": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chain or address parameter."
+          },
+          "402": {
+            "description": "Payment required (x402 v2)."
+          },
+          "502": {
+            "description": "Upstream RPC unavailable."
+          }
+        }
+      }
+    },
+    "/api/v1/faucets": {
+      "get": {
+        "summary": "Testnet faucet directory",
+        "description": "Faucet list for Sepolia or Base Sepolia: name, URL, amount, cooldown, requirements.",
+        "operationId": "getFaucets",
+        "parameters": [
+          {
+            "name": "chain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sepolia",
+                "base-sepolia"
+              ]
+            },
+            "description": "Testnet chain id."
+          }
+        ],
+        "x-payment-info": {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "1000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x803C50DDE8899168e8443aea9CA82a6Fe693Fd7C",
+          "maxTimeoutSeconds": 120,
+          "extra": {
+            "name": "USD Coin",
+            "version": "2"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Faucet directory.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chain": {
+                      "type": "string"
+                    },
+                    "faucets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "amount": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "cooldown": {
+                            "type": "string"
+                          },
+                          "notes": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing chain parameter."
+          },
+          "402": {
+            "description": "Payment required (x402 v2)."
+          }
+        }
+      }
+    }
+  }
+}
