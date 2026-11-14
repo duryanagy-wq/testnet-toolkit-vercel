@@ -452,7 +452,7 @@ const OPENAPI = {
     version: "1.0.0",
     description: "Gas prices, balances, and faucet directory for Sepolia and Base Sepolia testnets. Paid $0.001/call in USDC on Base (x402 v2).",
   },
-  servers: [{ url: "https://testnet-toolkit.netlify.app", description: "Placeholder — replace with the deployed Netlify URL before publish." }],
+  servers: [{ url: "https://rococo-haupia-20e86a.netlify.app", description: "Placeholder — replace with the deployed Netlify URL before publish." }],
   paths: {
     "/api/v1/gas": {
       get: {
